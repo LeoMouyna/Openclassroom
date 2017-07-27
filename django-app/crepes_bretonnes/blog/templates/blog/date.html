@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Today{% endblock %}
+{% block content %}
+    <h1>Today is gonna be a good day !</h1>
+        <p>La date actuelle est : {{date|date:"l s F Y"}}</p>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home Page{% endblock %}
+{% block img %}
+<img src="{% static 'blog/crepes.jpg' %}" alt="Une image de crêpes" title="Une sacrée paire de crêpes"/>
+{% endblock %}
+{% block content %}
+    <h1>Bienvenue sur mon blog !</h1>
+        <p>Les crêpes bretonnes ça tue des mouettes en plein vol !</p>
+    {% for article in articles %}
+        <h2>{{article.title}}</h2>
+        <p>{{article.content}}</p>
+        <p class="category">{{article.category}}</p>
+        <p>Par {{article.author}} le {{article.date|date:"l s F Y"}}</p>
+    {% empty %}
+        <h2>Toujours pas d'articles qu'est ce que tu attends</h2>
+    {% endfor %}
+{% endblock %}
