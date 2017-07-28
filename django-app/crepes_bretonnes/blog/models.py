@@ -1,13 +1,13 @@
 from django.db import models
-from django.utils.text import slugify
 
 
 class Article(models.Model):
     title = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100, null=True)
     author = models.CharField(max_length=40)
     content = models.TextField(null=True)
     date = models.DateTimeField(auto_now_add=True, auto_now=False, verbose_name="Published date")
-    category = models.ForeignKey('Category', default=None)
+    category = models.ForeignKey('Category', null=True)
 
     def __str__(self):
         """

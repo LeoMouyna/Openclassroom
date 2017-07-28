@@ -8,7 +8,7 @@
     <h1>Bienvenue sur mon blog !</h1>
         <p>Les crêpes bretonnes ça tue des mouettes en plein vol !</p>
     {% for article in articles %}
-<h2> <a href="{% url 'afficher_article' article.id %}"> {{article.title}} </a></h2>
+<h2> <a href="{% url 'afficher_article' article.id article.slug %}"> {{article.title}} </a></h2>
         <p>{{article.content|truncatewords:80}}</p>
         <p class="category">{{article.category}}</p>
         <p>Par {{article.author}} le {{article.date|date:"l s F Y"}}</p>

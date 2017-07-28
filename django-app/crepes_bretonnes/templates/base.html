@@ -10,9 +10,9 @@
        {% block nav %}
        <ul>
             <li><a href="{% url 'home_page' %}">Accueil</a></li>
-            <li><a href="/blog/">Blog</a></li>
+            <li><a href="{% url 'home_page' %}">Blog</a></li>
             <li><a href="{% url 'afficher_date' %}">Date</a></li>
-            <li><a href="/contact/">Contact</a></li>
+            <li><a href="{% url 'formulaire' %}">Un formulaire</a></li>
        </ul>
        {% endblock %}
         {% block img %}{% endblock %}
