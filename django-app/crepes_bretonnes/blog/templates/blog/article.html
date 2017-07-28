@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{article.title}}{% endblock %}
+{% block img %}
+<img src="{% static 'blog/crepes.jpg' %}" alt="Une image de crêpes" title="Une sacrée paire de crêpes"/>
+{% endblock %}
+{% block content %}
+    <h1>Bienvenue sur mon blog !</h1>
+        <p>Les crêpes bretonnes ça tue des mouettes en plein vol !</p>
+        <h2> {{article.title}} </a></h2>
+        <p>{{article.content}}</p>
+        <p class="category">{{article.category}}</p>
+        <p>Par {{article.author}} le {{article.date|date:"l s F Y"}}</p>
+{% endblock %}

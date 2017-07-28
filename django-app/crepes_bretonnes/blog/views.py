@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from datetime import datetime
 from blog.models import Article
@@ -10,15 +10,9 @@ def home(request):
 
 
 def read_article(request, id_article):
-    """
-    Vue qui affiche un article selon son identifiant (ou ID, ici un numéro)
-    Son ID est le second paramètre de la fonction (pour rappel, le premier
-    paramètre est TOUJOURS la requête de l'utilisateur)
-    """
+    article = get_object_or_404(Article, id=id_article)
 
-    return HttpResponse(
-        "Vous avez demandé l'article #{0}".format(id_article)
-    )
+    return render(request, 'blog/article.html', locals())
 
 
 def date_actuelle(request):
