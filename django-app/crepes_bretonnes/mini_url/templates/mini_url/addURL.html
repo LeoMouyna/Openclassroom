@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Ajout d'URL{% endblock %}
+{% block content %}
+    <h1>Raccourcir une URL</h1>
+        <form action="{% url 'add_url' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit" />
+        </form>
+{% endblock %}

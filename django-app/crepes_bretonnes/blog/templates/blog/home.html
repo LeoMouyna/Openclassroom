@@ -11,7 +11,7 @@
 <h2> <a href="{% url 'afficher_article' article.id article.slug %}"> {{article.title}} </a></h2>
         <p>{{article.content|truncatewords:80}}</p>
         <p class="category">{{article.category}}</p>
-        <p>Par {{article.author}} le {{article.date|date:"l s F Y"}}</p>
+        <p>Par {{article.author}} le {{article.date|date:"l d F Y"}}</p>
     {% empty %}
         <h2>Toujours pas d'articles qu'est ce que tu attends</h2>
     {% endfor %}
