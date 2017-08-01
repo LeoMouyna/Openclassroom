@@ -1,38 +1,34 @@
-from django.shortcuts import render, redirect
-from mini_url.forms import Mini_urlForm
-from mini_url.models import Mini_url
-import random
-import string
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import Mini_urlForm
+from .models import Mini_url
 
-
-def generer(nb_caracteres):
-    caracteres = string.ascii_letters + string.digits
-    aleatoire = [random.choice(caracteres) for _ in range(nb_caracteres)]
-
-    return ''.join(aleatoire)
-
-
-def addURL(request):
-
-    form = Mini_urlForm(request.POST or None)
-
-    if form.is_valid():
-        url = form.save(commit=False)
-        url.code = generer(6)
-        url.save()
-
-    return render(request, 'mini_url/addURL.html', locals())
 
 
 def listURL(request):
 
-    urls = Mini_url.objects.order_by('access_number')
+    urls = Mini_url.objects.order_by('-access_number')
 
     return render(request, 'mini_url/listURL.html', locals())
 
 
+def addURL(request):
+
+    if request.method == "POST":
+        form = Mini_urlForm(request.POST)
+
+        if form.is_valid():
+            url = form.save()
+            return redirect('home_url')
+
+    else:
+        form = Mini_urlForm()
+
+    return render(request, 'mini_url/addURL.html', locals())
+
+
 def redirectURL(request, code):
-    url_object = Mini_url.objects.get(code=code)
+    url_object = get_object_or_404(Mini_url, code=code)
     url_object.access_number += 1
     url_object.save()
-    return redirect(url_object.url)
+
+    return redirect(url_object.url, permanent=True)#Dire que la redirection est permanante

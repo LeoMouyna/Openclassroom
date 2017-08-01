@@ -1,5 +1,5 @@
 from django import forms
-from mini_url.models import Mini_url
+from .models import Mini_url
 
 
 class Mini_urlForm(forms.ModelForm):
