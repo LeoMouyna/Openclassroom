@@ -1,0 +1,40 @@
+{% extends "blog/base.html" %}
+
+{% block title %}{{ article.titre }}{% endblock %}
+
+{% block content %}
+
+	<p>
+		<a href="{% url 'accueil' %}">Retour à la liste des articles</a>
+	</p>
+
+	<h2 class="titre-article">{{ article.titre }}</h2>
+	<p class="infos-article">Par {{ article.auteur }}, le {{ article.date }}</p>
+
+	<div class="contenu-article">
+		{{ article.contenu|safe }}
+	</div>
+
+	<h3 class="titre-comments">Commentaires</h3>
+
+	<h4>Poster votre propre commentaire</h4>
+	<form method="post" action="{% url 'blog_lire' article.slug %}" class="pure-form">
+
+		{% csrf_token %}
+		{{ form.as_p }}
+
+		<p style="text-align:center">
+			<input class="pure-button pure-button-primary" type="submit" />
+		</p>
+	</form>
+
+	<div class="clear"></div>
+
+	{% for comment in comments %}
+	<div class="commentaire">
+			<p>{{comment.pseudo}}, le {{ comment.date|date:'l d F Y' }}</p>
+			<p>{{comment.content}}</p>
+	</div>
+	{% endfor %}
+
+{% endblock %}
