@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+    <h1>Bienvenue sur le raccourcisseur d'URL !</h1>
+        <p> <a href="{% url 'add_url' %}">Raccourcir une URL</a> </p>
+    <p>Liste des URLs raccourcies :</p>
+    <ul>
+        {% for url in urls %}
+            <li>
+                {{url.url}} via <a href="{% url 'redirection' url.code %}">
+                {{ request.get_host }}{% url 'redirection' url.code %}</a>
+                 ({{url.access_number}} accès)
+            </li>
+        {% empty %}
+            <p>Aucune url ajoutée, vous pouvez en ajouter <a href="{% url 'add_url' %}">ici</a></p>
+        {% endfor %}
+    </ul>
+{% endblock %}
