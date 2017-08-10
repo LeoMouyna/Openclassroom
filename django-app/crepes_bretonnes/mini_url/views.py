@@ -28,7 +28,14 @@ class UpdateURL(generic.UpdateView):
     success_url = reverse_lazy('home_url')
 
     def get_object(self):
-        return Mini_url.objects.get(code=self.kwargs['code'])
+        return get_object_or_404(Mini_url, code=self.kwargs['code'])
+
+    """On peut effecuer des actions avant l'enregistrement en base de l'objet"""
+    """def form_valid(self, form):
+        self.object = form.save()
+        # Envoi d'un message à l'utilisateur
+        messages.success(self.request, "Votre profil a été mis à jour avec succès.")
+        return HttpResponseRedirect(self.get_success_url())"""
 
 
 def redirectURL(request, code):
