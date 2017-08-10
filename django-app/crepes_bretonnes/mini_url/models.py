@@ -16,12 +16,12 @@ class Mini_url(models.Model):
         return "{0} :{1}".format(self.code, self.url)
 
     def save(self, *args, **kargs):
-        if self.code is None:
-            self.code = self.generer(6)
+        if not self.code:
+            self.code = self.generate(6)
 
         super(Mini_url, self).save()
 
-    def generer(self, nb_caracteres):
+    def generate(self, nb_caracteres):
         caracteres = string.ascii_letters + string.digits
         aleatoire = [random.choice(caracteres) for _ in range(nb_caracteres)]
 

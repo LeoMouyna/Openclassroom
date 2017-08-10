@@ -10,7 +10,7 @@
             <li>
                 {{url.url}} via <a href="{% url 'redirection' url.code %}">
                 {{ request.get_host }}{% url 'redirection' url.code %}</a>
-                 ({{url.access_number}} accès)
+                 ({{url.access_number}} accès) <a href="{% url 'update_url' url.code %}"> Update</a>
             </li>
         {% empty %}
             <p>Aucune url ajoutée, vous pouvez en ajouter <a href="{% url 'add_url' %}">ici</a></p>
