@@ -34,8 +34,12 @@ def formulaire(request):
     # Nous vérifions que les données envoyées sont valides
     # Cette méthode renvoie False s'il n'y a pas de données
     # dans le formulaire ou qu'il contient des erreurs.
-    if form.is_valid:
-        form.save()
+    if form.is_valid():
+        """Permet de créer un arcticle sans l'enregistrer en base. Pratique si besoin de traitement avant
+        enregistrement."""
+        article = form.save(commit=False)
+        article.slug = slugify(article.title)
+        article.save()
 
     return render(request, 'blog/formulaire.html', locals())
 
